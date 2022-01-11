@@ -13,7 +13,6 @@
 #pragma comment(lib, "d3dcompiler.lib")
 
 #include <DirectXTex.h>
-#include <wrl.h>
 
 #include <xaudio2.h>
 #pragma comment(lib,"xaudio2.lib")
@@ -964,7 +963,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//DirectXの初期化
 	dxCommon = new DirectXCommon();
-	dxCommon->Initialize();
+	dxCommon->Initialize(winApp);
 
 	HRESULT result;
 
@@ -1075,7 +1074,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	// 頂点バッファの生成
 	ComPtr<ID3D12Resource> vertBuff;
-	result = dev->CreateCommittedResource(
+	result = dxCommon->GetDev()->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),   // アップロード可能
 		D3D12_HEAP_FLAG_NONE,
 		&CD3DX12_RESOURCE_DESC::Buffer(sizeVB),
@@ -1105,7 +1104,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	// インデックスバッファの生成
 	ComPtr<ID3D12Resource> indexBuff;
-	result = dev->CreateCommittedResource(
+	result = dxCommon->GetDev()->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),   // アップロード可能
 		D3D12_HEAP_FLAG_NONE,
 		&CD3DX12_RESOURCE_DESC::Buffer(sizeIB),
@@ -1164,7 +1163,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE; // シェーダーから見える
 	descHeapDesc.NumDescriptors = constantBufferNum + 1;
 	// 生成
-	result = dev->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&basicDescHeap));
+	result = dxCommon->GetDev()->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&basicDescHeap));
 
 	// 3Dオブジェクトの数
 	const int OBJECT_NUM = 2;
@@ -1175,7 +1174,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < _countof(object3ds); i++)
 	{
 		// 初期化
-		InitializeObject3d(&object3ds[i], i, dev.Get(), basicDescHeap.Get());
+		InitializeObject3d(&object3ds[i], i, dxCommon->GetDev(), basicDescHeap.Get());
 
 		// ここから↓は親子構造のサンプル
 		// 先頭以外なら
@@ -1195,16 +1194,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	object3ds[1].scale = { 0.5f, 0.5f, 0.5f };
 
 	// スプライト共通データ生成
-	spriteCommon = SpriteCommonCreate(dev.Get(), WinApp::window_width, WinApp::window_height);
+	spriteCommon = SpriteCommonCreate(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
 	// スプライト共通テクスチャ読み込み
-	SpriteCommonLoadTexture(spriteCommon, 0, L"Resources/texture.png", dev.Get());
-	SpriteCommonLoadTexture(spriteCommon, 1, L"Resources/house.png", dev.Get());
+	SpriteCommonLoadTexture(spriteCommon, 0, L"Resources/texture.png", dxCommon->GetDev());
+	SpriteCommonLoadTexture(spriteCommon, 1, L"Resources/house.png", dxCommon->GetDev());
 
 	// スプライトの生成
 	for (int i = 0; i < _countof(sprites); i++)
 	{
 		int texNumber = rand() % 2;
-		sprites[i] = SpriteCreate(dev.Get(), WinApp::window_width, WinApp::window_height, texNumber, spriteCommon, { 0,0 }, false, false);
+		sprites[i] = SpriteCreate(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height, texNumber, spriteCommon, { 0,0 }, false, false);
 
 		// スプライトの座標変更
 		sprites[i].position.x = 1280 / 2;
@@ -1228,9 +1227,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// デバッグテキスト用のテクスチャ番号を指定
 	const int debugTextTexNumber = 2;
 	// デバッグテキスト用のテクスチャ読み込み
-	SpriteCommonLoadTexture(spriteCommon, debugTextTexNumber, L"Resources/debugfont.png", dev.Get());
+	SpriteCommonLoadTexture(spriteCommon, debugTextTexNumber, L"Resources/debugfont.png", dxCommon->GetDev());
 	// デバッグテキスト初期化
-	debugText.Initialize(dev.Get(), WinApp::window_width, WinApp::window_height, debugTextTexNumber, spriteCommon);
+	debugText.Initialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height, debugTextTexNumber, spriteCommon);
 
 	// WICテクスチャのロード
 	TexMetadata metadata{};
@@ -1253,7 +1252,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	// テクスチャ用バッファの生成
 	ComPtr<ID3D12Resource> texbuff = nullptr;
-	result = dev->CreateCommittedResource(
+	result = dxCommon->GetDev()->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0),
 		D3D12_HEAP_FLAG_NONE,
 		&texresDesc,
@@ -1278,13 +1277,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	srvDesc.Texture2D.MipLevels = 1;
 
 	// ヒープの2番目にシェーダーリソースビュー作成
-	dev->CreateShaderResourceView(texbuff.Get(), //ビューと関連付けるバッファ
+	dxCommon->GetDev()->CreateShaderResourceView(texbuff.Get(), //ビューと関連付けるバッファ
 		&srvDesc, //テクスチャ設定情報
-		CD3DX12_CPU_DESCRIPTOR_HANDLE(basicDescHeap->GetCPUDescriptorHandleForHeapStart(), constantBufferNum, dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV))
+		CD3DX12_CPU_DESCRIPTOR_HANDLE(basicDescHeap->GetCPUDescriptorHandleForHeapStart(), constantBufferNum, dxCommon->GetDev()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV))
 	);
 
 	// 3Dオブジェクト用パイプライン生成
-	PipelineSet object3dPipelineSet = Object3dCreateGraphicsPipeline(dev.Get());
+	PipelineSet object3dPipelineSet = Object3dCreateGraphicsPipeline(dxCommon->GetDev());
 
 #pragma endregion 描画初期化処理
 
@@ -1406,29 +1405,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		// ４．描画コマンドここから
 		// パイプラインステートとルートシグネチャの設定
-		cmdList->SetPipelineState(object3dPipelineSet.pipelinestate.Get());
-		cmdList->SetGraphicsRootSignature(object3dPipelineSet.rootsignature.Get());
+		dxCommon->GetCmdList()->SetPipelineState(object3dPipelineSet.pipelinestate.Get());
+		dxCommon->GetCmdList()->SetGraphicsRootSignature(object3dPipelineSet.rootsignature.Get());
 
 		//cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-		cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		dxCommon->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		//cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 
 		for (int i = 0; i < _countof(object3ds); i++)
 		{
-			DrawObject3d(&object3ds[i], cmdList.Get(), basicDescHeap.Get(), vbView, ibView,
-				CD3DX12_GPU_DESCRIPTOR_HANDLE(basicDescHeap->GetGPUDescriptorHandleForHeapStart(), constantBufferNum, dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)),
+			DrawObject3d(&object3ds[i], dxCommon->GetCmdList(), basicDescHeap.Get(), vbView, ibView,
+				CD3DX12_GPU_DESCRIPTOR_HANDLE(basicDescHeap->GetGPUDescriptorHandleForHeapStart(), constantBufferNum, dxCommon->GetDev()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)),
 				indices, _countof(indices));
 		}
 
 		// スプライト共通コマンド
-		SpriteCommonBeginDraw(spriteCommon, cmdList.Get());
+		SpriteCommonBeginDraw(spriteCommon, dxCommon->GetCmdList());
 		// スプライト描画
 		for (int i = 0; i < _countof(sprites); i++)
 		{
-			SpriteDraw(sprites[i], cmdList.Get(), spriteCommon, dev.Get());
+			SpriteDraw(sprites[i], dxCommon->GetCmdList(), spriteCommon, dxCommon->GetDev());
 		}
 		// デバッグテキスト描画
-		debugText.DrawAll(cmdList.Get(), spriteCommon, dev.Get());
+		debugText.DrawAll(dxCommon->GetCmdList(), spriteCommon, dxCommon->GetDev());
 
 		// ４．描画コマンドここまで
 

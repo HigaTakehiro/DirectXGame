@@ -26,6 +26,13 @@ public: //メンバ関数
 	/// 描画後処理
 	/// </summary>
 	void PostDraw();
+	/// <summary>
+	/// デバイスの取得
+	/// </summary>
+	/// <returns></returns>
+	ID3D12Device* GetDev() { return dev.Get(); }
+
+	ID3D12GraphicsCommandList* GetCmdList() { return cmdList.Get(); }
 private: //メンバ変数
 	//ウィンドウズアプリケーション管理
 	WinApp* winApp;
