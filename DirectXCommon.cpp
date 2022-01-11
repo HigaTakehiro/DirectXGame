@@ -26,6 +26,57 @@ void DirectXCommon::Initialize(WinApp* winApp) {
 	InitializeFence();
 }
 
+void DirectXCommon::PreDraw() {
+	// バックバッファの番号を取得（2つなので0番か1番）
+	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
+
+	// １．リソースバリアで書き込み可能に変更
+	cmdList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(backBuffers[bbIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+
+	// ２．描画先指定
+	// レンダーターゲットビュー用ディスクリプタヒープのハンドルを取得
+	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(), bbIndex, dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV));
+	// 深度ステンシルビュー用デスクリプタヒープのハンドルを取得
+	CD3DX12_CPU_DESCRIPTOR_HANDLE dsvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
+
+	// ３．画面クリア           R     G     B    A
+	float clearColor[] = { 0.1f,0.25f, 0.5f,0.0f }; // 青っぽい色
+	cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	// ビューポート領域の設定
+	cmdList->RSSetViewports(1, &CD3DX12_VIEWPORT(0.0f, 0.0f, WinApp::window_width, WinApp::window_height));
+	// シザー矩形の設定
+	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
+}
+
+void DirectXCommon::PostDraw() {
+	// バックバッファの番号を取得（2つなので0番か1番）
+	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
+	cmdList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(backBuffers[bbIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
+
+	// 命令のクローズ
+	cmdList->Close();
+	// コマンドリストの実行
+	ID3D12CommandList* cmdLists[] = { cmdList.Get() }; // コマンドリストの配列
+	cmdQueue->ExecuteCommandLists(1, cmdLists);
+	// コマンドリストの実行完了を待つ
+	cmdQueue->Signal(fence.Get(), ++fenceVal);
+	if (fence->GetCompletedValue() != fenceVal) {
+		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
+		fence->SetEventOnCompletion(fenceVal, event);
+		WaitForSingleObject(event, INFINITE);
+		CloseHandle(event);
+	}
+
+	cmdAllocator->Reset(); // キューをクリア
+	cmdList->Reset(cmdAllocator.Get(), nullptr);  // 再びコマンドリストを貯める準備
+
+	// バッファをフリップ（裏表の入替え）
+	swapchain->Present(1, 0);
+}
+
 void DirectXCommon::InitializeDev() {
 	HRESULT result = S_FALSE;
 

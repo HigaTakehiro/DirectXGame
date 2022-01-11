@@ -18,6 +18,14 @@ public: //メンバ関数
 	/// 初期化
 	/// </summary>
 	void Initialize(WinApp* win);
+	/// <summary>
+	/// 描画前処理
+	/// </summary>
+	void PreDraw();
+	/// <summary>
+	/// 描画後処理
+	/// </summary>
+	void PostDraw();
 private: //メンバ変数
 	//ウィンドウズアプリケーション管理
 	WinApp* winApp;
