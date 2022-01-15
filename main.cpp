@@ -21,6 +21,7 @@
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "Object3d.h"
+#include "Model.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -884,9 +885,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);
 
-	//Object3dの初期化
+	//入力の初期化
+	input = new Input();
+	input->Initialize(winApp);
+
+	//Object3d & Modelの初期化の初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
-	Object3d* object3d = Object3d::Create();
+	Model* model1 = model1 = Model::CreateModel("armor");
+	Object3d* object3d = Object3d::Create(model1);
+	XMFLOAT3 scale = { 15, 15, 15 };
+	XMFLOAT3 pos = { 0, 0, 0 };
+	object3d->SetScale(scale);
+	object3d->SetPosition(pos);
 
 	HRESULT result;
 
@@ -894,10 +904,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SpriteCommon spriteCommon;
 	const int SPRITES_NUM = 1;
 	Sprite sprites[SPRITES_NUM];
-
-	//入力の初期化
-	input = new Input();
-	input->Initialize(winApp);
 
 	ComPtr<IXAudio2> xAudio2;
 	IXAudio2MasteringVoice* masterVoice;
@@ -1255,13 +1261,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// DirectX毎フレーム処理　ここまで
 
 		dxCommon->PreDraw();
+		Object3d::PreDraw(dxCommon->GetCmdList());
 
 		// ４．描画コマンドここから
 
 		//cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		dxCommon->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		//cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-
+		object3d->Draw();
 		object3d->Update();
 
 		// スプライト共通コマンド
@@ -1277,6 +1284,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// ４．描画コマンドここまで
 
 		dxCommon->PostDraw();
+		Object3d::PostDraw();
 
 	}
 
@@ -1293,5 +1301,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	delete dxCommon;
 	//Object3d解放
 	delete object3d;
+	//model解放
+	delete model1;
 	return 0;
 }
