@@ -78,11 +78,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
+    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
+    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,9 +147,9 @@
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object2D\Sprite.cpp" />
     <ClCompile Include="Object3d\Model.cpp" />
     <ClCompile Include="Object3d\Object3d.cpp" />
-    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
@@ -203,9 +203,9 @@
     <ClInclude Include="Base\DirectXCommon.h" />
     <ClInclude Include="Base\WinApp.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Object2D\Sprite.h" />
     <ClInclude Include="Object3d\Model.h" />
     <ClInclude Include="Object3d\Object3d.h" />
-    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />
