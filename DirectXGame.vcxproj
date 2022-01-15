@@ -147,6 +147,7 @@
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object2D\DebugText.cpp" />
     <ClCompile Include="Object2D\Sprite.cpp" />
     <ClCompile Include="Object3d\Model.cpp" />
     <ClCompile Include="Object3d\Object3d.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Base\DirectXCommon.h" />
     <ClInclude Include="Base\WinApp.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Object2D\DebugText.h" />
     <ClInclude Include="Object2D\Sprite.h" />
     <ClInclude Include="Object3d\Model.h" />
     <ClInclude Include="Object3d\Object3d.h" />
