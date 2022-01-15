@@ -403,7 +403,7 @@ void Object3d::LoadTexture() {
 	ScratchImage scratchImg{};
 
 	result = LoadFromWICFile(
-		L"Resources/house.png",   //「Resources」フォルダの「texture.png」
+		L"Resources/texture.png",   //「Resources」フォルダの「texture.png」
 		WIC_FLAGS_NONE,
 		&metadata, scratchImg);
 
