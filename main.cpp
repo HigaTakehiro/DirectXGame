@@ -1,23 +1,4 @@
-﻿//#include <Windows.h>
-//#include <d3d12.h>
-//#include <dxgi1_6.h>
-//#pragma comment(lib, "d3d12.lib")
-//#pragma comment(lib, "dxgi.lib")
-//#include <d3dx12.h>
-//
-//#include <vector>
-//#include <string>
-//#include <fstream>
-//#include <DirectXMath.h>
-//#include <d3dcompiler.h>
-//#pragma comment(lib, "d3dcompiler.lib")
-//
-//#include <DirectXTex.h>
-//
-//#include <xaudio2.h>
-//#pragma comment(lib,"xaudio2.lib")
-
-#include "Input.h"
+﻿#include "Input.h"
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "Object3d.h"
@@ -28,7 +9,6 @@
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
-
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -95,7 +75,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// DirectX毎フレーム処理　ここから
 
 		//デバッグテキスト
-		debugText.Print("Test", 100, 100, 10.0f);
+		if (input->PushKey(DIK_SPACE)) {
+			debugText.Print("Test", 100, 100, 10.0f);
+		}
 
 		input->Update();
 		object3d->Update();
@@ -118,10 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		debugText.DrawAll(dxCommon->GetCmdList());
 		Sprite::PostDraw();
 
-
-
 		// ４．描画コマンドここまで
-
 		dxCommon->PostDraw();
 	}
 

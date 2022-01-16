@@ -4,8 +4,7 @@
 
 #pragma comment(lib,"xaudio2.lib")
 
-bool Audio::Initialize()
-{
+bool Audio::Initialize() {
 	HRESULT result;
 
 	// XAudioエンジンのインスタンスを生成
@@ -25,8 +24,7 @@ bool Audio::Initialize()
 	return true;
 }
 
-void Audio::PlayWave(const char* filename, bool roop, float volume)
-{
+void Audio::PlayWave(const char* filename, bool roop, float volume) {
 	HRESULT result;
 	// ファイルストリーム
 	std::ifstream file;
