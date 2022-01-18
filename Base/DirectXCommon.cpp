@@ -26,7 +26,7 @@ void DirectXCommon::Initialize(WinApp* winApp) {
 	InitializeFence();
 }
 
-void DirectXCommon::PreDraw() {
+void DirectXCommon::PreDraw(XMFLOAT4 color) {
 	// バックバッファの番号を取得（2つなので0番か1番）
 	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
 
@@ -41,7 +41,7 @@ void DirectXCommon::PreDraw() {
 	cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
 	// ３．画面クリア           R     G     B    A
-	float clearColor[] = { 0.1f,0.25f, 0.5f,0.0f }; // 青っぽい色
+	float clearColor[] = { color.x, color.y, color.z, color.w }; // 青っぽい色
 	cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
 	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
@@ -61,6 +61,10 @@ void DirectXCommon::PostDraw() {
 	// コマンドリストの実行
 	ID3D12CommandList* cmdLists[] = { cmdList.Get() }; // コマンドリストの配列
 	cmdQueue->ExecuteCommandLists(1, cmdLists);
+
+	// バッファをフリップ（裏表の入替え）
+	swapchain->Present(1, 0);
+
 	// コマンドリストの実行完了を待つ
 	cmdQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal) {
@@ -72,9 +76,6 @@ void DirectXCommon::PostDraw() {
 
 	cmdAllocator->Reset(); // キューをクリア
 	cmdList->Reset(cmdAllocator.Get(), nullptr);  // 再びコマンドリストを貯める準備
-
-	// バッファをフリップ（裏表の入替え）
-	swapchain->Present(1, 0);
 }
 
 void DirectXCommon::InitializeDev() {

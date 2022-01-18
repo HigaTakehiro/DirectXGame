@@ -62,6 +62,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	object3d->SetPosition(pos);
 	object3d->SetRotation(rotation);
 
+	XMFLOAT4 color = { 0.1f,0.25f, 0.5f,0.0f };
+
 	HRESULT result;
 
 	// DirectX初期化処理　ここまで
@@ -79,13 +81,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			debugText.Print("Test", 100, 100, 10.0f);
 		}
 
+		if (input->PushKey(DIK_0)) {
+			break;
+		}
+
 		input->Update();
 		object3d->Update();
 
 		// DirectX毎フレーム処理　ここまで
 		// ４．描画コマンドここから
 
-		dxCommon->PreDraw();
+		dxCommon->PreDraw(color);
 
 		//スプライト描画処理(背景)
 

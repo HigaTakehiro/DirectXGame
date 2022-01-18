@@ -6,6 +6,7 @@
 #include <wrl.h>
 #include <d3dx12.h>
 #include <cstdlib>
+#include <DirectXMath.h>
 
 #include "WinApp.h"
 
@@ -13,6 +14,11 @@ class DirectXCommon
 {
 private: //エイリアス
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+	// DirectX::を省略
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
 public: //メンバ関数
 	/// <summary>
 	/// 初期化
@@ -21,7 +27,8 @@ public: //メンバ関数
 	/// <summary>
 	/// 描画前処理
 	/// </summary>
-	void PreDraw();
+	/// <param name="color">背景色</param>
+	void PreDraw(XMFLOAT4 color);
 	/// <summary>
 	/// 描画後処理
 	/// </summary>
