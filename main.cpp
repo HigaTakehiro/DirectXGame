@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "DebugText.h"
 #include "Audio.h"
+#include "Camera.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -21,6 +22,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	DirectXCommon* dxCommon = nullptr;
 	DebugText debugText;
 	Audio* audio = nullptr;
+	Camera* camera = nullptr;
 
 	//WindowsAPIの初期化
 	winApp = new WinApp();
@@ -41,6 +43,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		return 1;
 	}
 	audio->PlayWave("Resources/Alarm01.wav", true, 0.2f);
+
+	//カメラの初期化
+	camera = new Camera();
 
 	//Sprite & DebugTextの初期化
 	Sprite::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
@@ -85,6 +90,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 
+		if (input->PushKey(DIK_LEFT)) {
+			camera->CameraMoveEyeVector({+2.0f, 0.0f, 0.0f});
+		}
+		if (input->PushKey(DIK_RIGHT)) {
+			camera->CameraMoveEyeVector({ -2.0f, 0.0f, 0.0f });
+		}
+		if (input->PushKey(DIK_UP)) {
+			camera->CameraMoveEyeVector({ 0.0f, 0.0f, +2.0f });
+		}
+		if (input->PushKey(DIK_DOWN)) {
+			camera->CameraMoveEyeVector({ 0.0f, 0.0f, -2.0f });
+		}
+
 		input->Update();
 		object3d->Update();
 
@@ -125,5 +143,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	delete sprite1;
 	//audio解放
 	delete audio;
+	//camera解放
+	delete camera;
 	return 0;
 }
