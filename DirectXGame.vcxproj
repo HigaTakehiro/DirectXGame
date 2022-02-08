@@ -134,6 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object2D\DebugText.cpp" />
     <ClCompile Include="Object2D\Sprite.cpp" />
+    <ClCompile Include="Object3d\MapChip.cpp" />
     <ClCompile Include="Object3d\Model.cpp" />
     <ClCompile Include="Object3d\Object3d.cpp" />
   </ItemGroup>
@@ -210,6 +212,7 @@
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Object2D\DebugText.h" />
     <ClInclude Include="Object2D\Sprite.h" />
+    <ClInclude Include="Object3d\MapChip.h" />
     <ClInclude Include="Object3d\Model.h" />
     <ClInclude Include="Object3d\Object3d.h" />
   </ItemGroup>

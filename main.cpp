@@ -7,6 +7,7 @@
 #include "DebugText.h"
 #include "Audio.h"
 #include "Camera.h"
+#include "MapChip.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -23,6 +24,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	DebugText debugText;
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
+	MapChip* mapchip = nullptr;
 
 	//WindowsAPIの初期化
 	winApp = new WinApp();
@@ -58,14 +60,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Object3d & Modelの初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
-	Model* model1 = model1 = Model::CreateModel("Player");
+	Model* model1 = Model::CreateModel("Player");
 	Object3d* object3d = Object3d::Create(model1);
-	XMFLOAT3 scale = { 15, 15, 15 };
-	XMFLOAT3 pos = { 0, 0, 0 };
+	XMFLOAT3 scale = { 5, 5, 5 };
+	XMFLOAT3 pos = { 0, 100, 0 };
 	XMFLOAT3 rotation = { 0, 180, 0 };
 	object3d->SetScale(scale);
 	object3d->SetPosition(pos);
 	object3d->SetRotation(rotation);
+
+	//マップチップの初期化
+	mapchip = new MapChip();
+	mapchip->MapChipInitialize();
+	int** map1_a = mapchip->MapLoad("test1", 7, 4);
+	int** map1_b = mapchip->MapLoad("test2", 7, 4);
+	std::vector<Object3d*> objects = mapchip->MapSet(map1_a, 7, 4, 0);
+	std::vector<Object3d*> objects2 = mapchip->MapSet(map1_b, 7, 4, 1);
 
 	XMFLOAT4 color = { 0.1f,0.25f, 0.5f,0.0f };
 
@@ -90,10 +100,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 
-		if (input->PushKey(DIK_LEFT)) {
+		if (input->PushKey(DIK_RIGHT)) {
 			camera->CameraMoveEyeVector({+2.0f, 0.0f, 0.0f});
 		}
-		if (input->PushKey(DIK_RIGHT)) {
+		if (input->PushKey(DIK_LEFT)) {
 			camera->CameraMoveEyeVector({ -2.0f, 0.0f, 0.0f });
 		}
 		if (input->PushKey(DIK_UP)) {
@@ -102,9 +112,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (input->PushKey(DIK_DOWN)) {
 			camera->CameraMoveEyeVector({ 0.0f, 0.0f, -2.0f });
 		}
+		if (input->PushKey(DIK_W)) {
+			camera->CameraMoveEyeVector({ 0.0f, +2.0f, 0.0f });
+		}
+		if (input->PushKey(DIK_S)) {
+			camera->CameraMoveEyeVector({ 0.0f, -2.0f, 0.0f });
+		}
 
 		input->Update();
 		object3d->Update();
+		for (auto object : objects) {
+			object->Update();
+		}
+		for (auto object : objects2) {
+			object->Update();
+		}
 
 		// DirectX毎フレーム処理　ここまで
 		// ４．描画コマンドここから
@@ -116,6 +138,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		//3Dオブジェクト描画処理
 		Object3d::PreDraw(dxCommon->GetCmdList());
 		object3d->Draw();
+		for (auto object : objects) {
+			object->Draw();
+		}
+		for (auto object : objects2) {
+			object->Draw();
+		}
 		Object3d::PostDraw();
 
 		//スプライト描画処理(UI等)
@@ -145,5 +173,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	delete audio;
 	//camera解放
 	delete camera;
+	//mapchip解放
+	mapchip->MapChipFinalize();
+	delete mapchip;
 	return 0;
 }
