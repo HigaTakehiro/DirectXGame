@@ -1,6 +1,7 @@
 #pragma once
 #include "Model.h"
 #include "Object3d.h"
+#include "SafeDelete.h"
 
 class MapChip
 {
@@ -36,7 +37,7 @@ public: //メンバ関数
 
 private: //メンバ変数
 	//ブロック一個分の大きさ
-	const float LAND_SCALE = 30.0f;
+	//const float LAND_SCALE = 30.0f;
 	int** map;
 
 	Model* blockModel = nullptr;

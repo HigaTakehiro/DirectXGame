@@ -35,6 +35,8 @@ int** MapChip::MapLoad(const std::string& mapname, int map_width, int map_height
 }
 
 std::vector<Object3d*> MapChip::MapSet(int** map, int map_width, int map_height, int height) {
+	const float LAND_SCALE = 30.0f;
+
 	std::vector<Object3d*> objects;
 
 	Model* modeltable[] = {
@@ -61,6 +63,5 @@ std::vector<Object3d*> MapChip::MapSet(int** map, int map_width, int map_height,
 
 
 void MapChip::MapChipFinalize() {
-	delete blockModel;
-	blockModel = nullptr;
+	safe_delete(blockModel);
 }
