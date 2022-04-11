@@ -5,6 +5,7 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
+	safe_delete(sprite);
 	safe_delete(model);
 	safe_delete(player);
 	safe_delete(map1_a);
@@ -116,4 +117,10 @@ void GameScene::Draw() {
 
 	// ‚SD•`‰æƒRƒ}ƒ“ƒh‚±‚±‚Ü‚Å
 	dxCommon->PostDraw();
+}
+
+void GameScene::Finalize() {
+	safe_delete(camera);
+	mapchip->MapChipFinalize();
+	safe_delete(mapchip);
 }

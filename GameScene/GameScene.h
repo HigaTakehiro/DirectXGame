@@ -1,11 +1,11 @@
 #pragma once
-#include "Input.h"
-#include "DirectXCommon.h"
+#include "Input.h"//
+#include "DirectXCommon.h"//
 #include "Object3d.h"
 #include "Model.h"
 #include "Sprite.h"
 #include "DebugText.h"
-#include "Audio.h"
+#include "Audio.h"//
 #include "Camera.h"
 #include "MapChip.h"
 #include "SafeDelete.h"
@@ -44,6 +44,11 @@ public: //ƒƒ“ƒoŠÖ”
 	/// •`‰æ
 	/// </summary>
 	void Draw();
+
+	/// <summary>
+	/// I—¹ˆ—
+	/// </summary>
+	void Finalize();
 
 private: //ƒƒ“ƒo•Ï”
 	DirectXCommon* dxCommon = nullptr;
