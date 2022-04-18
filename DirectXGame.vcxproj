@@ -153,6 +153,7 @@
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="FBX\FbxLoader.cpp" />
+    <ClCompile Include="FBX\FBXModel.cpp" />
     <ClCompile Include="GameScene\GameScene.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Base\WinApp.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="FBX\FbxLoader.h" />
+    <ClInclude Include="FBX\FBXModel.h" />
     <ClInclude Include="GameScene\GameScene.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Object2D\DebugText.h" />
