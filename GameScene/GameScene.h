@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "MapChip.h"
 #include "SafeDelete.h"
+#include "FbxLoader.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;

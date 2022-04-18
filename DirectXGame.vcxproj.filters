@@ -37,6 +37,9 @@
     <Filter Include="ソース ファイル\GameScene">
       <UniqueIdentifier>{27ea8696-4839-4901-b9ee-1a953fcb4757}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\FBX">
+      <UniqueIdentifier>{93d44c8d-931c-481a-b184-8fe7a1adda9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="GameScene\GameScene.cpp">
       <Filter>ソース ファイル\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="FBX\FbxLoader.cpp">
+      <Filter>ソース ファイル\FBX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="GameScene\GameScene.h">
       <Filter>ソース ファイル\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="FBX\FbxLoader.h">
+      <Filter>ソース ファイル\FBX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

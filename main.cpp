@@ -3,7 +3,6 @@
 #include "DirectXCommon.h"
 #include "Audio.h"
 #include "GameScene.h"
-#include "fbxsdk.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -16,7 +15,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	DirectXCommon* dxCommon = nullptr;
 	GameScene* gameScene = nullptr;
 	Audio* audio = nullptr;
-	FbxManager* fbxManager = FbxManager::Create();
 
 	//WindowsAPIの初期化
 	winApp = new WinApp();
@@ -65,6 +63,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//入力解放
 	safe_delete(input);
 	//GameScene解放
+	gameScene->Finalize();
 	safe_delete(gameScene);
 	//WindowsAPI解放
 	winApp->Finalize();

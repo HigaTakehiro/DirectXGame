@@ -78,12 +78,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\include;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\DirectXTex;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
+    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\FBX;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\include;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\DirectXTex;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
     <LibraryPath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\include;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\DirectXTex;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
+    <IncludePath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\FBX;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\include;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\DirectXTex;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\GameScene;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Camera;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Audio;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object2D;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Object3d;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Input;C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\Base;$(IncludePath)</IncludePath>
     <LibraryPath>C:\K020G1382\GE3\GE3_Start - コピー\DirectXGame\lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -152,6 +152,7 @@
     <ClCompile Include="Base\DirectXCommon.cpp" />
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="FBX\FbxLoader.cpp" />
     <ClCompile Include="GameScene\GameScene.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Base\SafeDelete.h" />
     <ClInclude Include="Base\WinApp.h" />
     <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="FBX\FbxLoader.h" />
     <ClInclude Include="GameScene\GameScene.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Object2D\DebugText.h" />
