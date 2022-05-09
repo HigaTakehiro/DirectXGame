@@ -1,4 +1,6 @@
 #include "GameScene.h"
+#include "FBXObject3d.h"
+#include <algorithm>
 
 GameScene::GameScene() {
 
@@ -55,7 +57,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 
 	//FBXの初期化
 	FbxLoader::GetInstance()->Initialize(dxCommon->GetDev());
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	FBXObject3d::SetDevice(dxCommon->GetDev());
+	FBXObject3d::SetCamera(camera);
+	FBXObject3d::CreateGraphicsPipeline();
+	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	object1 = new FBXObject3d;
+	object1->Initialize();
+	object1->SetModel(model1);
 }
 
 void GameScene::Update() {
@@ -85,9 +93,15 @@ void GameScene::Update() {
 	if (input->PushKey(DIK_S)) {
 		playerPos.z -= 0.5f;
 	}
+	if (input->PushKey(DIK_D)) {
+		playerPos.x += 0.5f;
+	}
+	if (input->PushKey(DIK_A)) {
+		playerPos.x -= 0.5f;
+	}
 
 	input->Update();
-	player->SetPosition(playerPos);
+	object1->SetPosition(XMFLOAT3(playerPos.x, playerPos.y - 50.0f, playerPos.z));
 	player->Update();
 	for (auto object : objects) {
 		object->Update();
@@ -95,6 +109,7 @@ void GameScene::Update() {
 	for (auto object : objects2) {
 		object->Update();
 	}
+	object1->Update();
 }
 
 void GameScene::Draw() {
@@ -111,6 +126,7 @@ void GameScene::Draw() {
 	for (auto object : objects2) {
 		object->Draw();
 	}
+	object1->Draw(dxCommon->GetCmdList());
 	Object3d::PostDraw();
 
 	//スプライト描画処理(UI等)
@@ -126,6 +142,10 @@ void GameScene::Draw() {
 void GameScene::Finalize() {
 	safe_delete(camera);
 	mapchip->MapChipFinalize();
+	objects.clear();
+	objects2.clear();
 	safe_delete(mapchip);
 	FbxLoader::GetInstance()->Finalize();
+	safe_delete(object1);
+	safe_delete(model1);
 }

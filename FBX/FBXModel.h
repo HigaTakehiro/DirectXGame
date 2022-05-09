@@ -68,6 +68,12 @@ public: //メンバ関数
 	/// <param name="cmdList">コマンドリスト</param>
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
+	/// <summary>
+	/// モデルの変換行列のゲッター
+	/// </summary>
+	/// <returns>モデルの変換行列</returns>
+	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
+
 private: //メンバ変数
 	//モデル名
 	string name;
@@ -99,7 +105,5 @@ private: //メンバ変数
 	D3D12_INDEX_BUFFER_VIEW ibView = {};
 	//SRV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV;
-	//モデルの変形行列取得
-	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
 };
 

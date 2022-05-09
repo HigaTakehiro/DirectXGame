@@ -10,6 +10,7 @@
 #include "MapChip.h"
 #include "SafeDelete.h"
 #include "FbxLoader.h"
+#include "FBXObject3d.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -71,11 +72,15 @@ private: //メンバ変数
 	std::vector<Object3d*> objects;
 	std::vector<Object3d*> objects2;
 
+	//FBX用変数
+	FBXModel* model1 = nullptr;
+	FBXObject3d* object1 = nullptr;
+
 	//ゲームシーン用変数
 	XMFLOAT3 playerPos = { 0, 0, 0 };
 	XMFLOAT3 playerScale = { 0, 0, 0 };
 	XMFLOAT3 playerRot = { 0, 0, 0 };
 
-	XMFLOAT4 color = { 0.1f,0.25f, 0.5f,0.0f };
+	XMFLOAT4 color = { 0.1f,0.25f, 0.5f, 0.0f };
 };
 

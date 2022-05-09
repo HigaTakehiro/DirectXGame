@@ -41,7 +41,7 @@ public: //メンバ関数
 	/// ファイルからFBXモデル読み込み
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
-	void LoadModelFromFile(const string& modelName);
+	FBXModel* LoadModelFromFile(const string& modelName);
 
 	/// <summary>
 	/// ノード構成を解析

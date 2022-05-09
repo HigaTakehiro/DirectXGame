@@ -31,14 +31,14 @@
     <Filter Include="ソース ファイル\Object2d">
       <UniqueIdentifier>{517fe389-7a70-4a1c-9782-cc5888d0316c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Object3d">
-      <UniqueIdentifier>{ba496a77-61e5-4391-ba80-8710154294fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\GameScene">
       <UniqueIdentifier>{27ea8696-4839-4901-b9ee-1a953fcb4757}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\FBX">
       <UniqueIdentifier>{93d44c8d-931c-481a-b184-8fe7a1adda9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object3d">
+      <UniqueIdentifier>{ba496a77-61e5-4391-ba80-8710154294fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +84,9 @@
     <ClCompile Include="FBX\FBXModel.cpp">
       <Filter>ソース ファイル\FBX</Filter>
     </ClCompile>
+    <ClCompile Include="FBX\FBXObject3d.cpp">
+      <Filter>ソース ファイル\FBX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Basic.hlsli">
@@ -95,6 +98,7 @@
     <None Include="Resources\shaders\OBJShaderHeader.hlsli">
       <Filter>シェーダーファイル</Filter>
     </None>
+    <None Include="Resources\shaders\FBX.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\BasicPS.hlsl">
@@ -115,6 +119,8 @@
     <FxCompile Include="Resources\shaders\OBJVertexShader.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXPS.hlsl" />
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\Audio.h">
@@ -157,6 +163,9 @@
       <Filter>ソース ファイル\FBX</Filter>
     </ClInclude>
     <ClInclude Include="FBX\FBXModel.h">
+      <Filter>ソース ファイル\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="FBX\FBXObject3d.h">
       <Filter>ソース ファイル\FBX</Filter>
     </ClInclude>
   </ItemGroup>
