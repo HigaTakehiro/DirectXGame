@@ -12,5 +12,5 @@ float4 main(VSOutput input) : SV_TARGET
 	float brightness = diffuse + 0.3f;
 	float4 shadecolor = float4(brightness, brightness, brightness, 1.0f);
 
-	return shadecolor + texcolor;
+	return shadecolor * texcolor;
 }

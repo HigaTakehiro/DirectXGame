@@ -41,7 +41,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 	model = Model::CreateModel("Player");
 	player = Object3d::Create(model);
 	playerScale = { 5, 5, 5 };
-	playerPos = { 0, 100, 0 };
+	playerPos = { 0, 0, 0 };
 	playerRot = { 0, 180, 0 };
 	player->SetScale(playerScale);
 	player->SetPosition(playerPos);
@@ -68,7 +68,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 
 void GameScene::Update() {
 	// DirectX毎フレーム処理　ここから
-	camera->SetTarget(playerPos);
+	camera->SetTarget(object1->GetPosition());
 
 	//デバッグテキスト
 	if (input->PushKey(DIK_SPACE)) {
@@ -99,9 +99,15 @@ void GameScene::Update() {
 	if (input->PushKey(DIK_A)) {
 		playerPos.x -= 0.5f;
 	}
+	if (input->PushKey(DIK_Q)) {
+		playerPos.y += 0.5f;
+	}
+	if (input->PushKey(DIK_E)) {
+		playerPos.y -= 0.5f;
+	}
 
 	input->Update();
-	object1->SetPosition(XMFLOAT3(playerPos.x, playerPos.y - 50.0f, playerPos.z));
+	object1->SetPosition(playerPos);
 	player->Update();
 	for (auto object : objects) {
 		object->Update();
