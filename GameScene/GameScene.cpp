@@ -149,7 +149,9 @@ void GameScene::Finalize() {
 	safe_delete(camera);
 	mapchip->MapChipFinalize();
 	objects.clear();
+	objects.shrink_to_fit();
 	objects2.clear();
+	objects2.shrink_to_fit();
 	safe_delete(mapchip);
 	FbxLoader::GetInstance()->Finalize();
 	safe_delete(object1);
