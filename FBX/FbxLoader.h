@@ -19,12 +19,21 @@ public: //定数
 	//テクスチャがない場合の標準テクスチャファイル名
 	static const string defaultTextureFileName;
 
-public: //メンバ関数
+public: //静的メンバ関数
 	/// <summary>
 	/// シングルトンインスタンスの取得
 	/// </summary>
 	/// <returns>インスタンス</returns>
 	static FbxLoader* GetInstance();
+
+	/// <summary>
+	/// FBXの行列をXMMatrixに変換
+	/// </summary>
+	/// <param name="dst">書き込み先</param>
+	/// <param name="src">元となるFBX行列</param>
+	static void ConvertMatrixFromFbx(DirectX::XMMATRIX* dst, const FbxAMatrix& src);
+
+public: //メンバ関数
 
 	/// <summary>
 	/// 初期化処理
@@ -82,6 +91,11 @@ public: //メンバ関数
 	/// ディレクトリを含んだファイルパスからファイル名を抽出する
 	/// </summary>
 	std::string ExtractFileName(const std::string& path);
+
+	/// <summary>
+	/// スキニング情報の読み取り
+	/// </summary>
+	void ParseSkin(FBXModel* model, FbxMesh* fbxMesh);
 
 private: //メンバ関数
 	// privateなコンストラクタ（シングルトンパターン）

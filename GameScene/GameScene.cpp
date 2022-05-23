@@ -64,6 +64,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 	object1 = new FBXObject3d;
 	object1->Initialize();
 	object1->SetModel(model1);
+
 }
 
 void GameScene::Update() {
@@ -153,7 +154,7 @@ void GameScene::Finalize() {
 	objects2.clear();
 	objects2.shrink_to_fit();
 	safe_delete(mapchip);
-	FbxLoader::GetInstance()->Finalize();
 	safe_delete(object1);
 	safe_delete(model1);
+	FbxLoader::GetInstance()->Finalize();
 }
