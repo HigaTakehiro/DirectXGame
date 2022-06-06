@@ -60,7 +60,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 	FBXObject3d::SetDevice(dxCommon->GetDev());
 	FBXObject3d::SetCamera(camera);
 	FBXObject3d::CreateGraphicsPipeline();
-	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	model1 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object1 = new FBXObject3d;
 	object1->Initialize();
 	object1->SetModel(model1);
@@ -108,7 +108,7 @@ void GameScene::Update() {
 	}
 
 	input->Update();
-	object1->SetPosition(playerPos);
+	//object1->SetPosition(playerPos);
 	player->Update();
 	for (auto object : objects) {
 		object->Update();

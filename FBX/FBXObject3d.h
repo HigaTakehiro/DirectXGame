@@ -1,6 +1,7 @@
 #pragma once
 #include "FBXModel.h"
 #include "Camera.h"
+#include "FbxLoader.h"
 
 #include <Windows.h>
 #include <wrl.h>
@@ -18,6 +19,10 @@ protected: //エイリアス
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 
+public: //定数
+    //ボーンの最大数
+	static const int MAX_BONES = 32;
+
 public: //サブクラス
 	//定数バッファ用データ構造体
 	struct ConstBufferDataTransform
@@ -25,6 +30,11 @@ public: //サブクラス
 		XMMATRIX viewproj;
 		XMMATRIX world;
 		XMFLOAT3 cameraPos;
+	};
+
+	struct ConstBufferDataSkin
+	{
+		XMMATRIX bones[MAX_BONES];
 	};
 
 public: //静的メンバ関数
@@ -105,6 +115,8 @@ protected: //メンバ変数
 	XMMATRIX matWorld;
 	//モデル
 	FBXModel* model = nullptr;
+	//定数バッファ(スキン)
+	ComPtr<ID3D12Resource> constBufferSkin;
 
 private: //静的メンバ変数
 	//デバイス
