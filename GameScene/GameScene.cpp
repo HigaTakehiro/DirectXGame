@@ -64,6 +64,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 	object1 = new FBXObject3d;
 	object1->Initialize();
 	object1->SetModel(model1);
+	object1->SetScale({ 5.0f, 5.0f, 5.0f });
 
 }
 
@@ -108,15 +109,16 @@ void GameScene::Update() {
 	}
 
 	input->Update();
-	//object1->SetPosition(playerPos);
+	object1->SetPosition(playerPos);
 	player->Update();
+	object1->Update();
+
 	for (auto object : objects) {
 		object->Update();
 	}
 	for (auto object : objects2) {
 		object->Update();
 	}
-	object1->Update();
 }
 
 void GameScene::Draw() {

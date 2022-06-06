@@ -356,6 +356,9 @@ void FbxLoader::ParseSkin(FBXModel* model, FbxMesh* fbxMesh) {
         bones.emplace_back(FBXModel::Bone(boneName));
         FBXModel::Bone& bone = bones.back();
 
+        //自作ボーンとFBXボーンを紐づける
+        bone.fbxCluster = fbxCluster;
+
         //FBXから初期姿勢行列を取得する
         FbxAMatrix fbxMat;
         fbxCluster->GetTransformLinkMatrix(fbxMat);
