@@ -102,6 +102,11 @@ public: //メンバ関数
 	/// <param name="rotation"></param>
 	void SetRotation(XMFLOAT3 rotation) { this->rotation = rotation; }
 
+	/// <summary>
+	/// アニメーション開始
+	/// </summary>
+	void PlayAnimation();
+
 protected: //メンバ変数
 	//定数バッファ
 	ComPtr<ID3D12Resource> constBufferTransform;
@@ -117,6 +122,16 @@ protected: //メンバ変数
 	FBXModel* model = nullptr;
 	//定数バッファ(スキン)
 	ComPtr<ID3D12Resource> constBufferSkin;
+	//1フレームの時間
+	FbxTime frameTime;
+	//アニメーション開始時間
+	FbxTime startTime;
+	//アニメーション終了時間
+	FbxTime endTime;
+	//現在時間(アニメーション)
+	FbxTime currentTime;
+	//アニメーション再生中かどうかのフラグ
+	bool isPlay = false;
 
 private: //静的メンバ変数
 	//デバイス

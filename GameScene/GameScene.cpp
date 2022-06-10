@@ -64,7 +64,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio) 
 	object1 = new FBXObject3d;
 	object1->Initialize();
 	object1->SetModel(model1);
-	object1->SetScale({ 5.0f, 5.0f, 5.0f });
+	object1->SetScale({ 1.0f, 1.0f, 1.0f });
+	object1->PlayAnimation();
 
 }
 
