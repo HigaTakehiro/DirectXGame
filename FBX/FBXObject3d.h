@@ -103,9 +103,21 @@ public: //メンバ関数
 	void SetRotation(XMFLOAT3 rotation) { this->rotation = rotation; }
 
 	/// <summary>
-	/// アニメーション開始
+	/// アニメーション再生
 	/// </summary>
-	void PlayAnimation();
+	/// <param name="isLoop">アニメーションをループさせるか</param>
+	void PlayAnimation(bool isLoop = true);
+
+	/// <summary>
+	/// アニメーションを停止
+	/// </summary>
+	void StopAnimation();
+
+	/// <summary>
+	/// 再生中かどうかの取得
+	/// </summary>
+	/// <returns></returns>
+	const bool& GetIsAnimation() { return isPlay; }
 
 protected: //メンバ変数
 	//定数バッファ
@@ -132,6 +144,8 @@ protected: //メンバ変数
 	FbxTime currentTime;
 	//アニメーション再生中かどうかのフラグ
 	bool isPlay = false;
+	//アニメーションをループさせるかどうかのフラグ
+	bool isLoop = false;
 
 private: //静的メンバ変数
 	//デバイス

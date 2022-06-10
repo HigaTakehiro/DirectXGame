@@ -264,6 +264,10 @@ void FBXObject3d::Update() {
 		//最後まで再生したら最初に戻す
 		if (currentTime > endTime) {
 			currentTime = startTime;
+			//アニメーションをループさせないなら停止する
+			if (!isLoop) {
+				isPlay = false;
+			}
 		}
 	}
 }
@@ -286,7 +290,7 @@ void FBXObject3d::Draw(ID3D12GraphicsCommandList* cmdList) {
 	model->Draw(cmdList);
 }
 
-void FBXObject3d::PlayAnimation() {
+void FBXObject3d::PlayAnimation(bool isLoop) {
 	FbxScene* fbxScene = model->GetFbxScene();
 	//0番のアニメーション取得
 	FbxAnimStack* animstack = fbxScene->GetSrcObject<FbxAnimStack>(0);
@@ -303,4 +307,10 @@ void FBXObject3d::PlayAnimation() {
 	currentTime = startTime;
 	//再生中状態のフラグを立てる
 	isPlay = true;
+	//ループさせるかのフラグを立てる
+	this->isLoop = isLoop;
+}
+
+void FBXObject3d::StopAnimation() {
+	isPlay = false;
 }
