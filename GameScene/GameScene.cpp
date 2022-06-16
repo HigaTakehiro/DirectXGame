@@ -129,7 +129,6 @@ void GameScene::Update() {
 }
 
 void GameScene::Draw() {
-	dxCommon->PreDraw(color);
 
 	//ƒXƒvƒ‰ƒCƒg•`‰æˆ—(”wŒi)
 
@@ -152,7 +151,6 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 	// ‚SD•`‰æƒRƒ}ƒ“ƒh‚±‚±‚Ü‚Å
-	dxCommon->PostDraw();
 }
 
 void GameScene::Finalize() {

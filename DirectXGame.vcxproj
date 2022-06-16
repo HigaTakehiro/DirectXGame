@@ -159,6 +159,7 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object2D\DebugText.cpp" />
+    <ClCompile Include="Object2D\PostEffect.cpp" />
     <ClCompile Include="Object2D\Sprite.cpp" />
     <ClCompile Include="Object3d\MapChip.cpp" />
     <ClCompile Include="Object3d\Model.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="GameScene\GameScene.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Object2D\DebugText.h" />
+    <ClInclude Include="Object2D\PostEffect.h" />
     <ClInclude Include="Object2D\Sprite.h" />
     <ClInclude Include="Object3d\MapChip.h" />
     <ClInclude Include="Object3d\Model.h" />

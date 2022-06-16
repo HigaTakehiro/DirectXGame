@@ -3,18 +3,23 @@
 #include "DirectXCommon.h"
 #include "Audio.h"
 #include "GameScene.h"
+#include "PostEffect.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	//背景色
+	const XMFLOAT4 backColor = { 0.1f,0.25f, 0.5f, 0.0f };
+
 	//ポインタ置き場
 	Input* input = nullptr;
 	WinApp* winApp = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	GameScene* gameScene = nullptr;
 	Audio* audio = nullptr;
+	PostEffect* postEffect = nullptr;
 
 	//WindowsAPIの初期化
 	winApp = new WinApp();
@@ -39,6 +44,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, input, audio);
 
+	//PostEffectの初期化
+	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+	postEffect = new PostEffect();
+	postEffect->Initialize();
+
+
 	// DirectX初期化処理　ここまで
 
 	while (true)  // ゲームループ
@@ -56,8 +67,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		// DirectX毎フレーム処理　ここまで
 		// ４．描画コマンドここから
+		dxCommon->PreDraw(backColor);
 
-		gameScene->Draw();
+		//gameScene->Draw();
+		postEffect->Draw(dxCommon->GetCmdList());
+
+		dxCommon->PostDraw();
+
 	}
 
 	//入力解放
@@ -72,5 +88,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	safe_delete(dxCommon);
 	//audio解放
 	safe_delete(audio);
+	//PostEffect解放
+	safe_delete(postEffect);
 	return 0;
 }

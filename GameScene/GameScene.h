@@ -81,6 +81,5 @@ private: //ƒƒ“ƒo•Ï”
 	XMFLOAT3 playerScale = { 0, 0, 0 };
 	XMFLOAT3 playerRot = { 0, 0, 0 };
 
-	XMFLOAT4 color = { 0.1f,0.25f, 0.5f, 0.0f };
 };
 
