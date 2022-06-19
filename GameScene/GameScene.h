@@ -5,7 +5,7 @@
 #include "Model.h"
 #include "Sprite.h"
 #include "DebugText.h"
-#include "Audio.h"//
+#include "Sound.h"//
 #include "Camera.h"
 #include "MapChip.h"
 #include "SafeDelete.h"
@@ -35,7 +35,7 @@ public: //メンバ関数
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio);
+	void Initialize(DirectXCommon* dxCommon, Input* input, Sound* sound);
 
 	/// <summary>
 	/// 更新
@@ -57,7 +57,7 @@ private: //メンバ変数
 	Input* input = nullptr;
 	WinApp* winApp = nullptr;
 	DebugText debugText;
-	Audio* audio = nullptr;
+	Sound* sound = nullptr;
 	Camera* camera = nullptr;
 	MapChip* mapchip = nullptr;
 

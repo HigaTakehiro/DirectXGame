@@ -7,7 +7,7 @@
 /// <summary>
 /// オーディオコールバック
 /// </summary>
-class XAudio2VoiceCallback : public IXAudio2VoiceCallback
+class XSound2VoiceCallback : public IXAudio2VoiceCallback
 {
 public:
 	// ボイス処理パスの開始時
@@ -33,7 +33,7 @@ public:
 /// <summary>
 /// オーディオ
 /// </summary>
-class Audio
+class Sound
 {
 private: // エイリアス
 	// Microsoft::WRL::を省略
@@ -74,6 +74,6 @@ public: // メンバ関数
 private: // メンバ変数
 	ComPtr<IXAudio2> xAudio2;
 	IXAudio2MasteringVoice* masterVoice;
-	XAudio2VoiceCallback voiceCallback;
+	XSound2VoiceCallback voiceCallback;
 };
 

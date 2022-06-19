@@ -1,7 +1,7 @@
 ﻿#include "Input.h"
 #include "WinApp.h"
 #include "DirectXCommon.h"
-#include "Audio.h"
+#include "Sound.h"
 #include "GameScene.h"
 #include "PostEffect.h"
 
@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	WinApp* winApp = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	GameScene* gameScene = nullptr;
-	Audio* audio = nullptr;
+	Sound* sound = nullptr;
 	PostEffect* postEffect = nullptr;
 
 	//WindowsAPIの初期化
@@ -33,16 +33,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	input = new Input();
 	input->Initialize(winApp);
 
-	//Audioの初期化
-	audio = new Audio();
-	if (!audio->Initialize()) {
+	//Soundの初期化
+	sound = new Sound();
+	if (!sound->Initialize()) {
 		assert(0);
 		return 1;
 	}
-	//audio->PlayWave("Resources/Alarm01.wav", true, 0.2f);
+	sound->PlayWave("Resources/Alarm01.wav", true, 0.2f);
 
 	gameScene = new GameScene();
-	gameScene->Initialize(dxCommon, input, audio);
+	gameScene->Initialize(dxCommon, input, sound);
 
 	//PostEffectの初期化
 	Sprite::LoadTexture(100, L"Resources/white1x1.png");
@@ -86,8 +86,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	safe_delete(winApp);
 	//DirectX解放
 	safe_delete(dxCommon);
-	//audio解放
-	safe_delete(audio);
+	//sound解放
+	safe_delete(sound);
 	//PostEffect解放
 	safe_delete(postEffect);
 	return 0;

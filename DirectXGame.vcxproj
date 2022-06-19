@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio\Audio.cpp" />
+    <ClCompile Include="Audio\Sound.cpp" />
     <ClCompile Include="Base\DirectXCommon.cpp" />
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
@@ -227,7 +227,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio\Audio.h" />
+    <ClInclude Include="Audio\Sound.h" />
     <ClInclude Include="Base\DirectXCommon.h" />
     <ClInclude Include="Base\SafeDelete.h" />
     <ClInclude Include="Base\WinApp.h" />

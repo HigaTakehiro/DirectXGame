@@ -1,13 +1,13 @@
-#include "Audio.h"
+#include "Sound.h"
 #include <fstream>
 #include <cassert>
 
 #pragma comment(lib,"xaudio2.lib")
 
-bool Audio::Initialize() {
+bool Sound::Initialize() {
 	HRESULT result;
 
-	// XAudioエンジンのインスタンスを生成
+	// XSoundエンジンのインスタンスを生成
 	result = XAudio2Create(&xAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
 	if FAILED(result) {
 		assert(0);
@@ -24,7 +24,7 @@ bool Audio::Initialize() {
 	return true;
 }
 
-void Audio::PlayWave(const char* filename, bool roop, float volume) {
+void Sound::PlayWave(const char* filename, bool roop, float volume) {
 	HRESULT result;
 	// ファイルストリーム
 	std::ifstream file;
