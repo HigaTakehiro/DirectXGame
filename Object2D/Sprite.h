@@ -6,7 +6,7 @@
 
 class Sprite
 {
-private: //エイリアス
+public: //エイリアス
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	using XMFLOAT2 = DirectX::XMFLOAT2;
 	using XMFLOAT3 = DirectX::XMFLOAT3;
