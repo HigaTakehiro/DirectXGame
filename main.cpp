@@ -39,13 +39,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		assert(0);
 		return 1;
 	}
-	sound->PlayWave("Resources/Alarm01.wav", true, 0.2f);
+	//sound->PlayWave("Resources/Alarm01.wav", true, 0.2f);
 
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, input, sound);
 
 	//PostEffectの初期化
-	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+	Sprite::LoadTexture(100, L"Resources/white1280x720.png");
 	postEffect = new PostEffect();
 	postEffect->Initialize();
 
@@ -67,9 +67,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		// DirectX毎フレーム処理　ここまで
 		// ４．描画コマンドここから
+		postEffect->PreDrawScene(dxCommon->GetCmdList());
+		gameScene->Draw();
+		postEffect->PostDrawScene(dxCommon->GetCmdList());
+
 		dxCommon->PreDraw(backColor);
 
-		//gameScene->Draw();
 		postEffect->Draw(dxCommon->GetCmdList());
 
 		dxCommon->PostDraw();
