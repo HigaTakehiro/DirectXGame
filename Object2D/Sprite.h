@@ -15,7 +15,7 @@ public: //エイリアス
 
 public: //サブクラス
 
-// 頂点データ
+    // 頂点データ
 	struct VertexPosUv
 	{
 		XMFLOAT3 pos; // xyz座標

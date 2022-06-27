@@ -34,6 +34,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Sound* sound) 
 
 	Sprite::LoadTexture(1, L"Resources/house.png");
 	sprite = Sprite::Create(1, { 0, 0 });
+	Sprite::LoadTexture(2, L"Resources/background.png");
+	background = Sprite::Create(2, { 0, 0 });
 
 	//Object3dの初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
@@ -131,6 +133,9 @@ void GameScene::Update() {
 void GameScene::Draw() {
 
 	//スプライト描画処理(背景)
+	Sprite::PreDraw(dxCommon->GetCmdList());
+	//background->Draw();
+	Sprite::PostDraw();
 
 	//3Dオブジェクト描画処理
 	Object3d::PreDraw(dxCommon->GetCmdList());

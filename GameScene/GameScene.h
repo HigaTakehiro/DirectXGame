@@ -65,6 +65,7 @@ private: //メンバ変数
 	Model* model = nullptr;
 	Object3d* player = nullptr;
 	Sprite* sprite = nullptr;
+	Sprite* background = nullptr;
 
 	//マップチップ用変数
 	int** map1_a = nullptr;

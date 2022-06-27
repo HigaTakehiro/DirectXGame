@@ -32,6 +32,11 @@ public: //メンバ関数
 	/// <param name="cmdList">コマンドリスト</param>
 	void PostDrawScene(ID3D12GraphicsCommandList* cmdList);
 
+	/// <summary>
+	/// パイプライン生成
+	/// </summary>
+	void CreateGraphicsPipelineState();
+
 public: //メンバ変数
 	//テクスチャバッファ
 	ComPtr<ID3D12Resource> texBuff;
@@ -43,6 +48,10 @@ public: //メンバ変数
 	ComPtr<ID3D12DescriptorHeap> descHeapRTV;
 	//DSV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapDSV;
+	//グラフィックスパイプライン
+	ComPtr<ID3D12PipelineState> pipelineState;
+	//ルートシグネチャ
+	ComPtr<ID3D12RootSignature> rootSignature;
 
 private: //静的メンバ変数
 	//画面クリアカラー

@@ -45,7 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	gameScene->Initialize(dxCommon, input, sound);
 
 	//PostEffectの初期化
-	Sprite::LoadTexture(100, L"Resources/white1280x720.png");
+	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	postEffect = new PostEffect();
 	postEffect->Initialize();
 
