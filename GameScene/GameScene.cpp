@@ -117,7 +117,6 @@ void GameScene::Update() {
 		playerPos.y -= 0.5f;
 	}
 
-	input->Update();
 	object1->SetPosition(playerPos);
 	player->Update();
 	object1->Update();
