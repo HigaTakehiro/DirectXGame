@@ -35,7 +35,7 @@ public: //ƒƒ“ƒoŠÖ”
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize(DirectXCommon* dxCommon, Input* input, Sound* sound);
+	void Initialize(DirectXCommon* dxCommon, Sound* sound);
 
 	/// <summary>
 	/// XV

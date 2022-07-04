@@ -102,6 +102,22 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
 	// 平行移動
 	this->matWorld *= XMMatrixTranslation(position.x, position.y, 0.0f);
 
+	if (Input::GetIns()->TriggerKey(DIK_9)) {
+		static int tex = 0;
+		tex = (tex + 1) % 2;
+
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = 1;
+		device->CreateShaderResourceView(
+			texBuff[tex].Get(),
+			&srvDesc,
+			descHeapSRV->GetCPUDescriptorHandleForHeapStart()
+		);
+	}
+
 	// 定数バッファに転送
 	ConstBufferData* constMap = nullptr;
 	HRESULT result = this->constBuff->Map(0, nullptr, (void**)&constMap);

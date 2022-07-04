@@ -14,7 +14,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const XMFLOAT4 backColor = { 0.1f,0.25f, 0.5f, 0.0f };
 
 	//ポインタ置き場
-	Input* input = nullptr;
+	Input* input = Input::GetIns();
 	WinApp* winApp = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	GameScene* gameScene = nullptr;
@@ -30,7 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	dxCommon->Initialize(winApp);
 
 	//入力の初期化
-	input = new Input();
+	//input = new Input();
 	input->Initialize(winApp);
 
 	//Soundの初期化
@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//sound->PlayWave("Resources/Alarm01.wav", true, 0.2f);
 
 	gameScene = new GameScene();
-	gameScene->Initialize(dxCommon, input, sound);
+	gameScene->Initialize(dxCommon, sound);
 
 	//PostEffectの初期化
 	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
@@ -79,8 +79,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	}
 
-	//入力解放
-	safe_delete(input);
 	//GameScene解放
 	gameScene->Finalize();
 	safe_delete(gameScene);

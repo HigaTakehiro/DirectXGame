@@ -14,14 +14,13 @@ GameScene::~GameScene() {
 	safe_delete(map1_b);
 }
 
-void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Sound* sound) {
+void GameScene::Initialize(DirectXCommon* dxCommon, Sound* sound) {
 	assert(dxCommon);
-	assert(input);
 	assert(sound);
 
 	this->dxCommon = dxCommon;
-	this->input = input;
 	this->sound = sound;
+	input = Input::GetIns();
 
 	//ƒJƒƒ‰‰Šú‰»
 	camera = new Camera;

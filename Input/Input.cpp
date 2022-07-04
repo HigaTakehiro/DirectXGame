@@ -43,3 +43,9 @@ bool Input::TriggerKey(BYTE keyNumber) {
 	//‚»‚¤‚Å‚È‚¯‚ê‚Îfalse‚ð•Ô‚·
 	return false;
 }
+
+Input* Input::GetIns()
+{
+	static Input instance;
+	return &instance;
+}
