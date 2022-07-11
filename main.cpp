@@ -14,7 +14,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	const XMFLOAT4 backColor = { 0.1f,0.25f, 0.5f, 0.0f };
 
 	//ポインタ置き場
-	Input* input = Input::GetIns();
 	WinApp* winApp = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	GameScene* gameScene = nullptr;
@@ -31,7 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//入力の初期化
 	//input = new Input();
-	input->Initialize(winApp);
+	Input::GetIns()->Initialize(winApp);
 
 	//Soundの初期化
 	sound = new Sound();
@@ -58,11 +57,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 
-		if (input->PushKey(DIK_0)) {
+		if (Input::GetIns()->PushKey(DIK_0)) {
 			break;
 		}
 
-		input->Update();
+		Input::GetIns()->Update();
 		gameScene->Update();
 
 		// DirectX毎フレーム処理　ここまで

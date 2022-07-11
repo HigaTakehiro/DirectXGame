@@ -37,11 +37,6 @@ public: //メンバ関数
 	/// </summary>
 	void CreateGraphicsPipelineState();
 
-	/// <summary>
-	/// シーン変更用関数
-	/// </summary>
-	void SetSceneChange();
-
 public: //メンバ変数
 	//テクスチャバッファ
 	ComPtr<ID3D12Resource> texBuff[2];

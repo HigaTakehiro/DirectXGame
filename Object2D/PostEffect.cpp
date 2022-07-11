@@ -43,10 +43,10 @@ void PostEffect::Initialize() {
 
 	//頂点データ
 	VertexPosUv vertices[vertNum] = {
-		{{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}}, //左下
-		{{-0.5f, +0.5f, 0.0f}, {0.0f, 0.0f}}, //左上
-		{{+0.5f, -0.5f, 0.0f}, {1.0f, 1.0f}}, //右下
-		{{+0.5f, +0.5f, 0.0f}, {1.0f, 0.0f}}, //右上
+		{{-1.0f, -1.0f, 0.0f}, {0.0f, 1.0f}}, //左下
+		{{-1.0f, +1.0f, 0.0f}, {0.0f, 0.0f}}, //左上
+		{{+1.0f, -1.0f, 0.0f}, {1.0f, 1.0f}}, //右下
+		{{+1.0f, +1.0f, 0.0f}, {1.0f, 0.0f}}, //右上
 	};
 
 	// 頂点バッファデータ転送
@@ -95,13 +95,6 @@ void PostEffect::Initialize() {
 }
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
-	// ワールド行列の更新
-	//this->matWorld = XMMatrixIdentity();
-	// Z軸回転
-	this->matWorld *= XMMatrixRotationZ(XMConvertToRadians(rotation));
-	// 平行移動
-	this->matWorld *= XMMatrixTranslation(position.x, position.y, 0.0f);
-
 	if (Input::GetIns()->TriggerKey(DIK_9)) {
 		static int tex = 0;
 		tex = (tex + 1) % 2;
@@ -117,6 +110,13 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
 			descHeapSRV->GetCPUDescriptorHandleForHeapStart()
 		);
 	}
+
+	// ワールド行列の更新
+	//this->matWorld = XMMatrixIdentity();
+	// Z軸回転
+	this->matWorld *= XMMatrixRotationZ(XMConvertToRadians(rotation));
+	// 平行移動
+	this->matWorld *= XMMatrixTranslation(position.x, position.y, 0.0f);
 
 	// 定数バッファに転送
 	ConstBufferData* constMap = nullptr;
@@ -145,6 +145,8 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
 	//描画
 	cmdList->DrawInstanced(4, 1, 0, 0);
+
+
 }
 
 void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList) {
@@ -160,7 +162,10 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList) {
 	//レンダーターゲットビュー用デスクリプタヒープのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvH[2]; 
 	for (int i = 0; i < 2; i++) {
-		rtvH[i] = descHeapRTV->GetCPUDescriptorHandleForHeapStart();
+		rtvH[i] = CD3DX12_CPU_DESCRIPTOR_HANDLE(
+			descHeapRTV->GetCPUDescriptorHandleForHeapStart(), i,
+			device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)
+		);
 	}
 
 	//深度ステンシルビュー用デスクリプタヒープのハンドルを取得
@@ -327,23 +332,6 @@ void PostEffect::CreateGraphicsPipelineState() {
 	result = device->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelineState));
 	assert(SUCCEEDED(result));
 
-}
-
-void PostEffect::SetSceneChange()
-{
-	static int tex = 0;
-	tex = (tex + 1) % 2;
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
-	device->CreateShaderResourceView(
-		texBuff[tex].Get(),
-		&srvDesc,
-		descHeapSRV->GetCPUDescriptorHandleForHeapStart()
-	);
 }
 
 void PostEffect::TexCreate() {
