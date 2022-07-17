@@ -132,7 +132,7 @@ void GameScene::Draw() {
 
 	//スプライト描画処理(背景)
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	//background->Draw();
+	background->Draw();
 	Sprite::PostDraw();
 
 	//3Dオブジェクト描画処理

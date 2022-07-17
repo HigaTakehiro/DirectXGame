@@ -95,21 +95,21 @@ void PostEffect::Initialize() {
 }
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
-	//if (Input::GetIns()->TriggerKey(DIK_9)) {
-	//	static int tex = 0;
-	//	tex = (tex + 1) % 2;
+	if (Input::GetIns()->TriggerKey(DIK_9)) {
+		static int tex = 0;
+		tex = (tex + 1) % 2;
 
-	//	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	//	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	//	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	//	srvDesc.Texture2D.MipLevels = 1;
-	//	device->CreateShaderResourceView(
-	//		texBuff[tex].Get(),
-	//		&srvDesc,
-	//		descHeapSRV->GetCPUDescriptorHandleForHeapStart()
-	//	);
-	//}
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = 1;
+		device->CreateShaderResourceView(
+			texBuff[tex].Get(),
+			&srvDesc,
+			descHeapSRV->GetCPUDescriptorHandleForHeapStart()
+		);
+	}
 
 	// ワールド行列の更新
 	//this->matWorld = XMMatrixIdentity();
@@ -324,6 +324,8 @@ void PostEffect::CreateGraphicsPipelineState() {
 
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
+	samplerDesc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_MIRROR; // ポストエフェクトを掛けたときに反対から出ないようにする設定
+	samplerDesc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_MIRROR;
 
 	// ルートシグネチャの設定
 	CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC rootSignatureDesc;
