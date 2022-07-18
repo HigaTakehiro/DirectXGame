@@ -1,5 +1,6 @@
 cbuffer cbuff0 : register(b0)
 {
+    float time;
 };
 
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体

@@ -346,6 +346,7 @@ bool Sprite::Initialize() {
 	if (SUCCEEDED(result)) {
 		constMap->color = color;
 		constMap->mat = matProjection;
+		constMap->time = time;
 		constBuff->Unmap(0, nullptr);
 	}
 

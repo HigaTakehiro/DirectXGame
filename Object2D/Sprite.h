@@ -26,6 +26,7 @@ public: //サブクラス
 	struct ConstBufferData {
 		XMFLOAT4 color; // 色 (RGBA)
 		XMMATRIX mat;   // ３Ｄ変換行列
+		float time;
 	};
 
 public: //静的メンバ関数
@@ -173,6 +174,8 @@ protected: //メンバ変数
 	XMFLOAT2 texBase = { 0, 0 };
 	// テクスチャサイズ
 	XMFLOAT2 texSize = { 100, 100 };
+	//時間
+	float time = 0.0f;
 
 private: //メンバ関数
 	/// <summary>

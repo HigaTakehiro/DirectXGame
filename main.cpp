@@ -4,6 +4,8 @@
 #include "Sound.h"
 #include "GameScene.h"
 #include "PostEffect.h"
+#include "Sprite.h"
+#include "DebugText.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -40,6 +42,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 	//sound->PlayWave("Resources/Alarm01.wav", true, 0.2f);
 
+	//スプライトの初期化
+	const int debugTextNumber = 0;
+	Sprite::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
+	DebugText debugText;
+
+	Sprite::LoadTexture(debugTextNumber, L"Resources/debugfont.png");
+	debugText.Initialize(debugTextNumber);
+
+	//ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, sound);
 
@@ -61,6 +72,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 
+		if (postEffect->GetPipelineNo() == 0) {
+			debugText.Print("GaussianBlur", 50, 50, 5.0f);
+		}
+		else if (postEffect->GetPipelineNo() == 1) {
+			debugText.Print("PhongShading", 50, 50, 5.0f);
+		}
+
+		debugText.Print("WASD:Move, Q:Up, E:Down", 50, 150, 2.0f);
+		debugText.Print("9:EffectChange, 0:End", 50, 200, 2.0f);
+
 		Input::GetIns()->Update();
 		gameScene->Update();
 
@@ -73,6 +94,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		dxCommon->PreDraw(backColor);
 
 		postEffect->Draw(dxCommon->GetCmdList());
+
+		Sprite::PreDraw(dxCommon->GetCmdList());
+		debugText.DrawAll(dxCommon->GetCmdList());
+		Sprite::PostDraw();
 
 		dxCommon->PostDraw();
 

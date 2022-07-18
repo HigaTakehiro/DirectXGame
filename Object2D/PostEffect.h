@@ -37,6 +37,12 @@ public: //メンバ関数
 	/// </summary>
 	void CreateGraphicsPipelineState();
 
+	/// <summary>
+	/// パイプライン番号取得
+	/// </summary>
+	/// <returns>パイプライン番号</returns>
+	const int GetPipelineNo() { return pipelineNo; }
+
 public: //メンバ変数
 	//テクスチャバッファ
 	ComPtr<ID3D12Resource> texBuff[2];
@@ -49,13 +55,17 @@ public: //メンバ変数
 	//DSV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapDSV;
 	//グラフィックスパイプライン
-	ComPtr<ID3D12PipelineState> pipelineState;
+	ComPtr<ID3D12PipelineState> pipelineState[2];
 	//ルートシグネチャ
 	ComPtr<ID3D12RootSignature> rootSignature;
 
 private: //静的メンバ変数
 	//画面クリアカラー
 	static const float clearColor[4];
+
+private: //メンバ変数
+	float time = 0.0f;
+	int pipelineNo = 0;
 
 private: //メンバ関数
 	/// <summary>

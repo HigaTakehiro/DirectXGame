@@ -26,10 +26,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Sound* sound) {
 	camera = new Camera;
 
 	//Sprite & DebugTextの初期化
-	Sprite::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
+	//Sprite::StaticInitialize(dxCommon->GetDev(), WinApp::window_width, WinApp::window_height);
 
-	Sprite::LoadTexture(debugTextNumber, L"Resources/debugfont.png");
-	debugText.Initialize(debugTextNumber);
+	//Sprite::LoadTexture(debugTextNumber, L"Resources/debugfont.png");
+	//debugText.Initialize(debugTextNumber);
 
 	Sprite::LoadTexture(1, L"Resources/house.png");
 	sprite = Sprite::Create(1, { 0, 0 });
@@ -85,35 +85,23 @@ void GameScene::Update() {
 		}
 	}
 
-	if (input->PushKey(DIK_RIGHT)) {
+	if (input->PushKey(DIK_D)) {
 		camera->CameraMoveEyeVector({ +2.0f, 0.0f, 0.0f });
 	}
-	if (input->PushKey(DIK_LEFT)) {
+	if (input->PushKey(DIK_A)) {
 		camera->CameraMoveEyeVector({ -2.0f, 0.0f, 0.0f });
 	}
-	if (input->PushKey(DIK_UP)) {
+	if (input->PushKey(DIK_W)) {
 		camera->CameraMoveEyeVector({ 0.0f, 0.0f, +2.0f });
 	}
-	if (input->PushKey(DIK_DOWN)) {
+	if (input->PushKey(DIK_S)) {
 		camera->CameraMoveEyeVector({ 0.0f, 0.0f, -2.0f });
 	}
-	if (input->PushKey(DIK_W)) {
-		playerPos.z += 0.5f;
-	}
-	if (input->PushKey(DIK_S)) {
-		playerPos.z -= 0.5f;
-	}
-	if (input->PushKey(DIK_D)) {
-		playerPos.x += 0.5f;
-	}
-	if (input->PushKey(DIK_A)) {
-		playerPos.x -= 0.5f;
-	}
 	if (input->PushKey(DIK_Q)) {
-		playerPos.y += 0.5f;
+		camera->CameraMoveEyeVector({ 0.0f, +2.0f, 0.0f });
 	}
 	if (input->PushKey(DIK_E)) {
-		playerPos.y -= 0.5f;
+		camera->CameraMoveEyeVector({ 0.0f, -2.0f, 0.0f });
 	}
 
 	object1->SetPosition(playerPos);
@@ -149,8 +137,8 @@ void GameScene::Draw() {
 
 	//スプライト描画処理(UI等)
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	sprite->Draw();
-	debugText.DrawAll(dxCommon->GetCmdList());
+	//sprite->Draw();
+	//debugText.DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 
 	// ４．描画コマンドここまで
