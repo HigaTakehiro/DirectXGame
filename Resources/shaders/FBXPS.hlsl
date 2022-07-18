@@ -19,13 +19,18 @@ PSOutput main(VSOutput input)
 	float brightness = diffuse + 0.3f;
 	float4 shadecolor = float4(brightness, brightness, brightness, 1.0f);
 	//ADS合成
-    float4 ambient = texcolor / 2;
-    float reflect = pow(diffuse, 50);
-    float4 lightref = (1, 1, 1, 1);
-    float4 specular = lightref * reflect;
+    float4 color = texcolor;
+    float4 ambient = float4(color.x * 0.5f, color.y * 0.5f, color.z * 0.5f, color.w);
+    float3 eyedir = normalize(camerapos.xyz - input.worldpos.xyz);
+    float3 halfvec = normalize(light + eyedir);
+    float intensity = saturate(dot(normalize(input.normal), halfvec));
+    float reflect = pow(intensity, 50);
+    float4 lightcolor = (1, 1, 1, 1);
+    float4 specular = reflect * lightcolor;
 	//陰影とテクスチャの色を合成
 	output.target0 = shadecolor * texcolor;
-	output.target1 = ambient + diffuse + reflect;
+    diffuse = color * reflect;
+    output.target1 = ambient + diffuse + specular;
 
 	return output;
 }

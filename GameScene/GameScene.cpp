@@ -61,11 +61,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Sound* sound) {
 	FBXObject3d::SetDevice(dxCommon->GetDev());
 	FBXObject3d::SetCamera(camera);
 	FBXObject3d::CreateGraphicsPipeline();
-	model1 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
+	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	object1 = new FBXObject3d;
 	object1->Initialize();
 	object1->SetModel(model1);
-	object1->SetScale({ 5.0f, 5.0f, 5.0f });
+	object1->SetScale({ 1.0f, 1.0f, 1.0f });
 	object1->PlayAnimation();
 
 }
@@ -137,13 +137,13 @@ void GameScene::Draw() {
 
 	//3Dオブジェクト描画処理
 	Object3d::PreDraw(dxCommon->GetCmdList());
-	player->Draw();
-	for (auto object : objects) {
-		object->Draw();
-	}
-	for (auto object : objects2) {
-		object->Draw();
-	}
+	//player->Draw();
+	//for (auto object : objects) {
+	//	object->Draw();
+	//}
+	//for (auto object : objects2) {
+	//	object->Draw();
+	//}
 	object1->Draw(dxCommon->GetCmdList());
 	Object3d::PostDraw();
 

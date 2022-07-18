@@ -62,6 +62,8 @@ VSOutput main(VSInput input)
 	output.normal = wnormal.xyz;
 	//入力値をそのまま次のステージに渡す
 	output.uv = input.uv;
+	//頂点座標をそのまま次のステージに渡す
+    output.worldpos = input.pos;
 
 	return output;
 }
