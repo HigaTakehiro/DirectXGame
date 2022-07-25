@@ -73,7 +73,7 @@ public: // ƒƒ“ƒoŠÖ”
 
 private: // ƒƒ“ƒo•Ï”
 	ComPtr<IXAudio2> xAudio2;
-	IXAudio2MasteringVoice* masterVoice;
+	IXAudio2MasteringVoice* masterVoice = nullptr;
 	XSound2VoiceCallback voiceCallback;
 };
 

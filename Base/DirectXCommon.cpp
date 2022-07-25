@@ -82,10 +82,12 @@ void DirectXCommon::InitializeDev() {
 	HRESULT result = S_FALSE;
 
 	//デバッグレイヤーをオンに
-	ComPtr<ID3D12Debug> debugController;
+	ComPtr<ID3D12Debug1> debugController;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		debugController->EnableDebugLayer();
+		//debugController->SetEnableGPUBasedValidation(TRUE); //重くなった場合ここをコメントアウトすること(ただし描画に問題がある場合はここを有効化すること)
+
 	}
 
 	// DXGIファクトリーの生成
@@ -142,6 +144,12 @@ void DirectXCommon::InitializeDev() {
 			featureLevel = levels[i];
 			break;
 		}
+	}
+
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(dev->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
 	}
 }
 
