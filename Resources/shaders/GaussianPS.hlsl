@@ -26,7 +26,7 @@ float4 main(VSOutput input) : SV_TARGET
         }
     }
     
-    color.rgb = color.rgb;
+    color.rgb = color.rgb / totalweight;
    
     return float4(color.rgb, 1);
 }
