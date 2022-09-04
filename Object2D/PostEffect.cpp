@@ -2,7 +2,7 @@
 #include "WinApp.h"
 #include "PostEffect.h"
 #include <d3dcompiler.h>
-#include "input.h"
+#include "Keyinput.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -95,13 +95,11 @@ void PostEffect::Initialize() {
 }
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
-	if (Input::GetIns()->TriggerKey(DIK_9)) {
+	if (KeyInput::GetIns()->TriggerKey(DIK_9)) {
 		static int tex = 0;
 		tex = (tex + 1) % 2;
 
 		pipelineNo = (pipelineNo + 1) % 2;
-
-		CreateGraphicsPipelineState();
 
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 		srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -115,8 +113,6 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList) {
 		);
 	}
 
-	// ワールド行列の更新
-	//this->matWorld = XMMatrixIdentity();
 	// Z軸回転
 	this->matWorld *= XMMatrixRotationZ(XMConvertToRadians(rotation));
 	// 平行移動

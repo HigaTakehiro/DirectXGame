@@ -1,5 +1,5 @@
 #pragma once
-#include "Input.h"//
+#include "KeyInput.h"//
 #include "DirectXCommon.h"//
 #include "Object3d.h"
 #include "Model.h"
@@ -54,12 +54,12 @@ public: //メンバ関数
 
 private: //メンバ変数
 	DirectXCommon* dxCommon = nullptr;
-	Input* input = nullptr;
 	WinApp* winApp = nullptr;
 	DebugText debugText;
 	Sound* sound = nullptr;
 	Camera* camera = nullptr;
 	MapChip* mapchip = nullptr;
+	KeyInput* input = nullptr;
 
 	//ゲームオブジェクト & スプライト
 	Model* model = nullptr;

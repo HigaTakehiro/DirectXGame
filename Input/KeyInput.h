@@ -10,7 +10,7 @@
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
 
-class Input final
+class KeyInput final
 {
 private: //エイリアス
 	//namespace省略
@@ -20,22 +20,22 @@ private:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Input() = default;
+	KeyInput() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Input() = default;
+	~KeyInput() = default;
 
 	/// <summary>
 	/// コピーコンストラクタを禁止
 	/// </summary>
-	Input(const Input& obj) = delete;
+	KeyInput(const KeyInput& obj) = delete;
 
 	/// <summary>
 	/// 代入演算子を禁止
 	/// </summary>
-	Input& operator=(const Input& obj) = delete;
+	KeyInput& operator=(const KeyInput& obj) = delete;
 
 public: //メンバ関数
 	/// <summary>
@@ -63,7 +63,7 @@ public: //メンバ関数
 	/// インスタンス取得用関数
 	/// </summary>
 	/// <returns>インスタンス</returns>
-	static Input* GetIns();
+	static KeyInput* GetIns();
 
 private: //メンバ変数
 	//DirectInputのインスタンス

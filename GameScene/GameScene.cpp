@@ -20,7 +20,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Sound* sound) {
 
 	this->dxCommon = dxCommon;
 	this->sound = sound;
-	input = Input::GetIns();
+	input = KeyInput::GetIns();
 
 	//ƒJƒƒ‰‰Šú‰»
 	camera = new Camera;

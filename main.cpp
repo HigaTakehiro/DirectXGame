@@ -1,4 +1,4 @@
-﻿#include "Input.h"
+﻿#include "KeyInput.h"
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "Sound.h"
@@ -32,7 +32,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//入力の初期化
 	//input = new Input();
-	Input::GetIns()->Initialize(winApp);
+	KeyInput::GetIns()->Initialize(winApp);
 
 	//Soundの初期化
 	sound = new Sound();
@@ -68,7 +68,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 
-		if (Input::GetIns()->PushKey(DIK_0)) {
+		if (KeyInput::GetIns()->PushKey(DIK_0)) {
 			break;
 		}
 
@@ -82,7 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		debugText.Print("WASD:Move, Q:Up, E:Down", 50, 150, 2.0f);
 		debugText.Print("9:EffectChange, 0:End", 50, 200, 2.0f);
 
-		Input::GetIns()->Update();
+		KeyInput::GetIns()->Update();
 		gameScene->Update();
 
 		// DirectX毎フレーム処理　ここまで

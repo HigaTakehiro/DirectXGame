@@ -225,7 +225,7 @@ void FBXObject3d::Update() {
 	matWorld *= matTrans;
 
 	//ビュープロジェクション行列
-	const XMMATRIX& matViewProjection = camera->MartixMix(matWorld);
+	const XMMATRIX& matViewProjection = matWorld * camera->GetMatView() * camera->GetMatProjection();
 	//モデルのメッシュトランスフォーム
 	const XMMATRIX& modelTransform = model->GetModelTransform();
 	//カメラ座標

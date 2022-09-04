@@ -48,17 +48,11 @@
     <ClCompile Include="Audio\Sound.cpp">
       <Filter>ソース ファイル\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Camera\Camera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Base\DirectXCommon.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
     <ClCompile Include="Base\WinApp.cpp">
       <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\Input.cpp">
-      <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="Object2D\DebugText.cpp">
       <Filter>ソース ファイル\Object2d</Filter>
@@ -89,6 +83,21 @@
     </ClCompile>
     <ClCompile Include="Object2D\PostEffect.cpp">
       <Filter>ソース ファイル\Object2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\MatCalc.cpp">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\KeyInput.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\MouseInput.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\PadInput.cpp">
+      <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,17 +154,11 @@
     <ClInclude Include="Audio\Sound.h">
       <Filter>ソース ファイル\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Camera\Camera.h">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Base\DirectXCommon.h">
       <Filter>ソース ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="Base\WinApp.h">
       <Filter>ソース ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Input\Input.h">
-      <Filter>ソース ファイル\Input</Filter>
     </ClInclude>
     <ClInclude Include="Object2D\DebugText.h">
       <Filter>ソース ファイル\Object2d</Filter>
@@ -189,6 +192,24 @@
     </ClInclude>
     <ClInclude Include="Object2D\PostEffect.h">
       <Filter>ソース ファイル\Object2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\MatCalc.h">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Vector3.h">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeyInput.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\MouseInput.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\PadInput.h">
+      <Filter>ソース ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

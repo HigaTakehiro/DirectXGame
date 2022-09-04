@@ -1,6 +1,6 @@
-#include "Input.h"
+#include "KeyInput.h"
 
-void Input::Initialize(WinApp* winApp) {
+void KeyInput::Initialize(WinApp* winApp) {
 	HRESULT result = S_FALSE;
 
 	//WinAppのインスタンスを記録
@@ -15,7 +15,7 @@ void Input::Initialize(WinApp* winApp) {
 	result = devkeyboard->SetCooperativeLevel(winApp->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 }
 
-void Input::Update() {
+void KeyInput::Update() {
 	HRESULT result;
 
 	//前回のキー入力を保存
@@ -26,7 +26,7 @@ void Input::Update() {
 	result = devkeyboard->GetDeviceState(sizeof(key), key);
 }
 
-bool Input::PushKey(BYTE keyNumber) {
+bool KeyInput::PushKey(BYTE keyNumber) {
 	//指定キーを押していればtrueを返す
 	if (key[keyNumber]) {
 		return true;
@@ -35,7 +35,7 @@ bool Input::PushKey(BYTE keyNumber) {
 	return false;
 }
 
-bool Input::TriggerKey(BYTE keyNumber) {
+bool KeyInput::TriggerKey(BYTE keyNumber) {
 	//前回は押していなくて、今回は押していればtrueを返す
 	if (!keyPre[keyNumber] && key[keyNumber]) {
 		return true;
@@ -44,8 +44,8 @@ bool Input::TriggerKey(BYTE keyNumber) {
 	return false;
 }
 
-Input* Input::GetIns()
+KeyInput* KeyInput::GetIns()
 {
-	static Input instance;
+	static KeyInput instance;
 	return &instance;
 }

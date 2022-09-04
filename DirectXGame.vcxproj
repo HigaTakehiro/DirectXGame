@@ -150,13 +150,16 @@
   <ItemGroup>
     <ClCompile Include="Audio\Sound.cpp" />
     <ClCompile Include="Base\DirectXCommon.cpp" />
+    <ClCompile Include="Base\MatCalc.cpp" />
     <ClCompile Include="Base\WinApp.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="FBX\FbxLoader.cpp" />
     <ClCompile Include="FBX\FBXModel.cpp" />
     <ClCompile Include="FBX\FBXObject3d.cpp" />
     <ClCompile Include="GameScene\GameScene.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Input\KeyInput.cpp" />
+    <ClCompile Include="Input\MouseInput.cpp" />
+    <ClCompile Include="Input\PadInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object2D\DebugText.cpp" />
     <ClCompile Include="Object2D\PostEffect.cpp" />
@@ -248,14 +251,18 @@
   <ItemGroup>
     <ClInclude Include="Audio\Sound.h" />
     <ClInclude Include="Base\DirectXCommon.h" />
+    <ClInclude Include="Base\MatCalc.h" />
     <ClInclude Include="Base\SafeDelete.h" />
+    <ClInclude Include="Base\Vector3.h" />
     <ClInclude Include="Base\WinApp.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="FBX\FbxLoader.h" />
     <ClInclude Include="FBX\FBXModel.h" />
     <ClInclude Include="FBX\FBXObject3d.h" />
     <ClInclude Include="GameScene\GameScene.h" />
-    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\KeyInput.h" />
+    <ClInclude Include="Input\MouseInput.h" />
+    <ClInclude Include="Input\PadInput.h" />
     <ClInclude Include="Object2D\DebugText.h" />
     <ClInclude Include="Object2D\PostEffect.h" />
     <ClInclude Include="Object2D\Sprite.h" />

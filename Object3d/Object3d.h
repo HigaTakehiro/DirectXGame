@@ -125,6 +125,29 @@ public: // メンバ関数
 	//モデルのセット
 	void SetModel(Model* model) { this->model = model; }
 
+	/// <summary>
+	/// ワールド変換行列の取得
+	/// </summary>
+	/// <returns>ワールド変換行列</returns>
+	const XMMATRIX& GetMatWorld() { return matWorld; }
+
+	/// <summary>
+	/// 親オブジェクト設定(カメラ)
+	/// </summary>
+	void SetCameraParent(Camera* cameraParent) { this->cameraParent = cameraParent; }
+
+	/// <summary>
+	/// 親オブジェクト設定(obj)
+	/// </summary>
+	/// <param name="parent"></param>
+	void SetParent(Object3d* parent) { this->parent = parent; }
+
+	/// <summary>
+	/// 親オブジェクト取得
+	/// </summary>
+	/// <returns>親オブジェクト</returns>
+	Object3d* GetParent() { return parent; }
+
 private: // メンバ変数
 	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
 	// 色
@@ -139,6 +162,8 @@ private: // メンバ変数
 	XMMATRIX matWorld;
 	// 親オブジェクト
 	Object3d* parent = nullptr;
+	//親オブジェクト(カメラ)
+	Camera* cameraParent = nullptr;
 	//モデルデータ
 	Model* model = nullptr;
 	//カメラ

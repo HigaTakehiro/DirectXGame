@@ -32,6 +32,11 @@ public: //静的メンバ関数
 	static void UpdateViewMatrix();
 
 	/// <summary>
+	/// ワールド行列の更新
+	/// </summary>
+	static void UpdateWorldMatrix();
+
+	/// <summary>
 	/// 視点座標の取得
 	/// </summary>
 	/// <returns>座標</returns>
@@ -61,20 +66,46 @@ public: //静的メンバ関数
 	/// <param name="move">移動量</param>
 	static void CameraMoveVector(XMFLOAT3 move);
 	static void CameraMoveEyeVector(XMFLOAT3 move);
+	static void CameraMoveTargetVector(XMFLOAT3 move);
 
-public: //メンバ関数
-	XMMATRIX MartixMix(XMMATRIX matWorld) { return matWorld * matView * matProjection; }
+	/// <summary>
+	/// ビュー行列の取得
+	/// </summary>
+	/// <returns>ビュー行列</returns>
+	static const XMMATRIX& GetMatView() { return matView; }
+
+	/// <summary>
+	/// 射影行列の取得
+	/// </summary>
+	/// <returns>射影行列</returns>
+	static const XMMATRIX& GetMatProjection() { return matProjection; }
+
+	/// <summary>
+	/// ワールド行列の取得
+	/// </summary>
+	/// <returns>ワールド行列</returns>
+	static const XMMATRIX& GetMatWorld() { return matWorld; }
+
+	/// <summary>
+	/// ビューポート行列の取得
+	/// </summary>
+	/// <returns>ビューポート行列</returns>
+	static const XMMATRIX& GetMatViewPort() { return matViewPort; }
 
 private: //静的メンバ変数
 	// ビュー行列
 	static XMMATRIX matView;
 	// 射影行列
 	static XMMATRIX matProjection;
+	//ワールド行列
+	static XMMATRIX matWorld;
 	// 視点座標
 	static XMFLOAT3 eye;
 	// 注視点座標
 	static XMFLOAT3 target;
 	// 上方向ベクトル
 	static XMFLOAT3 up;
+	//ビューポート行列
+	static XMMATRIX matViewPort;
 };
 

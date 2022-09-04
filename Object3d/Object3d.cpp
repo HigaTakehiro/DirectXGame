@@ -177,7 +177,6 @@ bool Object3d::InitializeGraphicsPipeline()
 
 	// ブレンドステートの設定
 	gpipeline.BlendState.RenderTarget[0] = blenddesc;
-	gpipeline.BlendState.RenderTarget[1] = blenddesc;
 
 	// 深度バッファのフォーマット
 	gpipeline.DSVFormat = DXGI_FORMAT_D32_FLOAT;
@@ -189,9 +188,8 @@ bool Object3d::InitializeGraphicsPipeline()
 	// 図形の形状設定（三角形）
 	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
-	gpipeline.NumRenderTargets = 2;	// 描画対象は1つ
+	gpipeline.NumRenderTargets = 1;	// 描画対象は1つ
 	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // 0～255指定のRGBA
-	gpipeline.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	gpipeline.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
 	// デスクリプタレンジ
@@ -254,7 +252,6 @@ bool Object3d::Initialize()
 
 void Object3d::Update()
 {
-	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
 
 	// スケール、回転、平行移動行列の計算
@@ -274,14 +271,19 @@ void Object3d::Update()
 	// 親オブジェクトがあれば
 	if (parent != nullptr) {
 		// 親オブジェクトのワールド行列を掛ける
-		matWorld *= parent->matWorld;
+		matWorld *= parent->GetMatWorld();
+	}
+
+	if (cameraParent != nullptr) {
+		matWorld *= cameraParent->GetMatWorld();
 	}
 
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap0 = nullptr;
-	result = constBuffB0->Map(0, nullptr, (void**)&constMap0);
-	constMap0->mat = camera->MartixMix(matWorld);
-	constBuffB0->Unmap(0, nullptr);
+	if (SUCCEEDED(constBuffB0->Map(0, nullptr, (void**)&constMap0))) {
+		constMap0->mat = matWorld * camera->GetMatView() * camera->GetMatProjection();
+		constBuffB0->Unmap(0, nullptr);
+	}
 
 	model->Update(model->GetMaterial());
 }
